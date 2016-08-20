@@ -1,4 +1,5 @@
 <?php
+ob_start();
  include 'database.php';
 //var_dump($_POST); exit;
 session_start();
@@ -10,9 +11,9 @@ if (isset($_POST["submit"]) && !empty($_POST))
 	$password = hash("SHA256", $password);
 	$query = "SELECT * FROM master_tab_user where username='$username' and password='$password' and status='active'";
 	$result = mysql_query($query);
+	$count=mysql_num_rows($result);
 
-
-	if ($result > 0)
+	if ($count > 0)
 	{
 		$_result = mysql_fetch_assoc($result);
 			
